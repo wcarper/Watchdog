@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchdog Setup</title>
+    <link rel="stylesheet" href="main.css">
+
+</head>
+
+
+<body class="light-theme" onload="process()">
+
+    </body>
+    <header>
+        <div class="navbar fixed-top">
+            <div class="container">
+              <div class="navtitle">Filament Watchdog</div>
+              <div class="navdata" id = "date">mm/dd/yyyy</div>
+              <div class="navheading">DATE</div><br>
+              <div class="navdata" id = "time">00:00:00</div>
+              <div class="navheading">TIME</div>
+              
+            </div>
+        </div>
+      </header>
+      <div class="pagespace"></div>
+
+    
+    <h1 class="pageheading">Configuration</h1>
+  
+
+<form action="/get">
+        <table>
+            <tr>
+                <td  class = "cat">
+                    Printer Name
+                </td>
+                <td  class = "res">
+                    <input type="text" id="PName" name="PName" value="%PNAME%">
+                </td>
+                <td  class = "det">
+                    Name of Printer.
+                </td>
+            
+            </tr>
+            <tr>
+                <td  class = "cat">
+                    Invert Output
+                </td>
+                <td  class = "res">
+                    <input type="checkbox" id="ckbInvertOut" name="ckbInvertOut" value="on" %InvertOut%>
+                </td>
+                <td  class = "det">
+                    Default = high, checked = low when filament absent/stopped.
+                </td>    
+            </tr>
+            <tr>
+                <td  class = "cat">
+                    Invert Screen
+                </td>
+                <td  class = "res">
+                    <input type="checkbox" id="ckbInvertScrn" name="ckbInvertScrn" value="on" %InvertScn%>
+                </td>
+                <td  class = "det">
+                    Default = normal, checked rotate 180 degrees.
+                </td>
+
+            </tr>
+            <tr>
+                <td  class = "cat">
+                    Monitor Filament Movement
+                </td>
+                <td  class = "res">
+                    <input type="checkbox" id="ckbMonFil" name="ckbMonFil" value="on" onclick="MonSel();" %MonFil%>
+                </td>
+                <td  class = "det">
+                    Default = on
+                </td>
+            </tr>
+            <tr id="ifMon" style="display:%ifMon%;">
+                <td  class = "cat">
+                    Mode
+                </td>
+                <td  class = "rad">
+                    <input type="radio" id="SelfDet" name="Mode" value="Self" onclick="ModeSel();"  %SelfMode%>
+                    <label for="SelfDet" class ="rad">Self Detect</label><br>
+                    <input type="radio" id="HostFirm" name="Mode" value="Host" onclick="ModeSel();"  %HostMode% >
+                    <label for="HostFirm" class ="rad">Host Firmware</label><br>
+                </td>
+                <td  class = "det">
+                    Default = Self Detect or use Host Firmware
+                </td>
+            </tr>
+
+            <tr id="ifMon" style="display:%ifMon%;">
+                <td  class = "cat">
+                    Behavior
+                </td>
+                <td  class = "rad">
+                    <input type="radio" id="NoteOnly" name="Behavior" value="NO"   %NoteBehavior%>
+                    <label for="NoteOnly" class ="rad">Notify Only</label><br>
+                    <input type="radio" id="RaiseError" name="Behavior" value="RE"   %ErrorBehavior% >
+                    <label for="RaiseError" class ="rad">Raise Error</label><br>
+                </td>
+                <td  class = "det">
+                    Notify only when filament stops or notify and raise error.
+                </td>
+            </tr>
+
+            
+
+            <tr  id="ifMon2" style="display:%ifMon%;">
+                <td  class = "cat">
+                    Detection Delay
+                </td>
+                <td  class = "res">
+                    <input type="text" id="DelaySec" name="DelaySec" value="%DelaySec%"> 
+                </td>
+                <td  class = "det">
+                    Time in Sec to delay before deciding movement cessation. 5 to 10 sec in self mode otherwise 20 to 30 sec.
+                </td>
+            </tr>
+            <tr  id="ifMon2" style="display:%ifMon%;">
+                <td  class = "cat">
+                    mm per Rotation
+                </td>
+                <td  class = "res">
+                    <input type="text" id="RotationMM" name="RotationMM" value="%RotationMM%"> 
+                </td>
+                <td  class = "det">
+                     Diameter of rotor (mm) * pi
+                </td>
+            </tr>
+            <tr  id="ifMon2" style="display:%ifMon%;">
+                <td  class = "cat">
+                    Sensitivity
+                </td>
+                <td  class = "res">
+                    <input type="text" id="Sensitivity" name="Sensitivity" value="%Sensitivity%"> 
+                </td>
+                <td  class = "det">
+                    Number of rotation pulses to ignore before reading (for noise reduction.) 
+                </td>
+            </tr>
+            <tr  id="ifMon2" style="display:%ifMon%;">
+                <td  class = "cat">
+                    Threshold
+                </td>
+                <td  class = "res">
+                    <input type="text" id="Threshold" name="Threshold" value="%Threshold%"> 
+                </td>
+                <td  class = "det">
+                    Number of mm to extrude before jam detection starts. 
+                </td>
+            </tr>
+
+            
+            <tr id="ifHost" style="display:%ifHost%;">
+                <td  class = "cat">
+                    Filament Stop Run Length
+                </td>
+                <td  class = "res">
+                    <input type="text" id="RunLen" name="RunLen" value="%RunLen%"> 
+                </td>
+                <td  class = "det">
+                    Distance for filament to run prior to host raising error. Should match your host settings - default is 3mm.
+                </td>
+            </tr>
+            
+    
+            <tr>
+                <td  class = "cat">
+                    Send Notifications
+                </td>
+                <td  class = "res">
+                    <input type="checkbox" id="ckbSendNote" name="ckbSendNote" value="on" onclick="NoteSel();" %SendNote% >
+                </td>
+                <td  class = "det">
+                    Default = on
+                </td>
+            </tr>
+            <tr id="ifSendNote" style="display:%ifSendNote%;">
+                <td  class = "cat">
+                    Notification URL http://
+                </td>
+                <td  class = "res">
+                    <input type="text" id="NoteURL" name="NoteURL" value="%NoteURL%">
+                </td>
+                <td  class = "det">
+                    Default is CallMeBot URL for WhatsApp.
+                </td>
+            </tr>
+            <tr id="ifSendNote1" style="display:%ifSendNote%;">
+                <td  class = "cat">
+                    Notification Phone
+                </td>
+                <td  class = "res">
+                    <input type="text" id="NotePhone" name="NotePhone" value="%NotePhone%">
+                </td>
+                <td  class = "det">
+                    Enter exactly as configured for WhatsApp or your messaging service
+                </td>
+            </tr>
+            <tr id="ifSendNote2" style="display:%ifSendNote%;">
+                <td  class = "cat">
+                    Notification APIKEY
+                </td>
+                <td  class = "res">
+                    <input type="text" id="NoteAPIKey" name="NoteAPIKey" value="%NoteAPIKey%">
+                </td>
+                <td  class = "det">
+                    Enter exactly as received by your messaging service
+                </td>
+            </tr>
+            <tr id="ifSendNote3" style="display:%ifSendNote%;">
+                <td  class = "cat">
+                    Filament Runout Message
+                </td>
+                <td  class = "res">
+                    <input type="text" id="FilRunout" name="FilRunout" value="%FilRunout%">
+                </td>
+                <td  class = "det">
+                    Default Message to use for runout notifications.
+                </td>
+            </tr>
+            <tr id="ifSendNote4" style="display:%ifSendNote%;">
+                <td  class = "cat">
+                    Filament Stop Message
+                </td>
+                <td  class = "res">
+                    <input type="text" id="FilStop" name="FilStop" value="%FilStop%">
+                </td>
+                <td  class = "det">
+                    Default Message to use when Filament stops moving.
+                </td>
+            </tr>
+            <tr id="ifSendNote5" style="display:%ifSendNote%;">
+                <td  class = "cat">
+                    SSID (Local Network)
+                </td>
+                <td  class = "res">
+                    <input type="text" id="SSID" name="SSID" value = "%SSID%">
+                </td>
+                <td  class = "det">
+                    Required when notifications = on.
+                </td>
+            </tr>
+            <tr id="ifSendNote6" style="display:%ifSendNote%;">
+                <td  class = "cat">
+                    PWD (Local Network)
+                </td>
+                <td  class = "res">
+                    <input type="text" id="PWD" name="PWD" value = "%PWD%">
+                </td>
+                <td  class = "det">
+                    Required when notifications = on.
+                </td>
+            </tr>
+
+        </table>
+    
+        <br>
+        
+        <input type="submit" value="Submit">
+        </form>
+           
+    <br>
+  
+
+<script src="app.js"></script>
+<noscript>You need to enable JavaScript to view the full site.</noscript>
+<br>
+<br>
+
+<footer div class="foot" id = "temp" >Filament Watchdog by W3RIOT</div></footer>
+</body>
+</html>

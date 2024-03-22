@@ -1,0 +1,177 @@
+
+
+:root {
+    --biege: #e3e6cf;
+    --white: #FFFFFF;
+    --black: #000000;
+  }
+
+body {
+    background: var(--bg);
+    color: var(--fontColor);
+    font-family: helvetica;
+  }
+
+ul {
+    font-family: helvetica;
+}
+li {
+    list-style: circle;
+  }
+  
+  .list {
+    list-style: square;
+  }
+  
+  #msg {
+    font-family: monospace;
+  }
+  .light-theme {
+    --bg: var(--biege);
+    --fontColor: var(--black);
+    --btnBg: var(--black);
+    --btnFontColor: var(--white);
+  }
+  
+  .btn {
+    border-radius: 15%;
+    border: none;
+    color: var(--btnFontColor);
+    background-color: var(--btnBg);
+  }
+    
+  .navbar {
+    width: 100%;
+    height: 30px;
+    margin: 0;
+    padding: 10px 0px;
+    background-color: #FFF;
+    color: #000000;
+    border-bottom: 5px solid #293578;
+  }
+  .fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+  .navtitle {
+    float: left;
+    height: 15px;
+    font-family: "Verdana", "Arial", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 15px;
+    padding-left: 5px;
+  }
+ .navheading {
+   position: fixed;
+   left: 60%;
+   height: 10px;
+   font-family: "Verdana", "Arial", sans-serif;
+   font-size: 10px;
+   font-weight: bold;
+   line-height: 10px;
+   padding-right: 5px;
+ }
+ .navdata {
+    justify-content: flex-end;
+    position: fixed;
+    left: 70%;
+    height: 10px;
+    font-family: "Verdana", "Arial", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 10px;
+    padding-right: 5px;
+ }
+
+ .pageheading {
+  height: 20px;
+  font-family: "Verdana", "Arial", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 10px;
+  padding-right: 5px;
+}
+
+.pagespace {
+  height: 50px;
+}
+
+.res {
+  height: 15px;
+  font-family: "Verdana", "Arial", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 10px;
+  padding-right: 5px;
+  text-align:left;
+
+}
+
+.cat {
+  height: 15px;
+  font-family: "Verdana", "Arial", sans-serif;
+  font-size: 12px;
+  line-height: 10px;
+  padding-right: 5px;
+}
+
+.det {
+  height: 15px;
+  font-family: "Verdana", "Arial", sans-serif;
+  font-size: 8px;
+  line-height: 10px;
+  padding-right: 5px;
+}
+
+.rad {
+  height: 15px;
+  font-family: "Verdana", "Arial", sans-serif;
+  font-size: 10px;
+  line-height: 10px;
+  padding-right: 5px;
+  text-align:left;
+}
+
+
+ .foot {
+  font-family: "Verdana", "Arial", sans-serif;
+  font-size: 10px;
+  position: relative;
+  height:   10px;
+  text-align:left;   
+  color: #AAAAAA;
+  line-height: 10px;
+}
+
+.infolblhide {
+   visibility:hidden;
+}
+
+.infolblshow {
+  font-family: "Verdana", "Arial", sans-serif;
+  font-size: 10px;
+  position: relative;
+  height:   10px;
+  text-align:left;   
+  line-height: 10px;
+}
+
+
+
+.filmoncomp {
+ font-family: "Verdana", "Arial", sans-serif;
+ font-size: 10px;
+ position: relative;
+ height:   10px;
+ text-align:left;   
+ line-height: 10px;
+
+}
+
+
+
+
